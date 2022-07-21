@@ -164,7 +164,7 @@ if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
 
   if ($sn != $total) {
     $sn++;
-    header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total") or die('Error152');
+    header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total&m=$m") or die('Error152');
     echo "<h1>here</h1>";
   } else if ($_SESSION['key'] != 'sunny7785068889') {
    

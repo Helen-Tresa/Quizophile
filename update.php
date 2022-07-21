@@ -114,6 +114,7 @@ if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
   $sn = @$_GET['n'];
   $total = @$_GET['t'];
   $ans = $_POST['ans'];
+  $m=@$_GET['m'];
   
   $qid = @$_GET['qid'];
   $q = mysqli_query($con, "SELECT * FROM answer WHERE qid='$qid' ");
@@ -160,8 +161,9 @@ if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
   }
   if ($sn != $total) {
     $sn++;
-    header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total") or die('Error152');
+    header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total&m=$m") or die('Error152');
     echo "<h1>here</h1>";
+  
   } else if ($_SESSION['key'] != 'sunny7785068889') {
     $q = mysqli_query($con, "SELECT score FROM history WHERE eid='$eid' AND email='$email'") or die('Error156');
     while ($row = mysqli_fetch_array($q)) {
@@ -179,6 +181,7 @@ if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
       $q = mysqli_query($con, "UPDATE `rank` SET `score`=$sun ,time=NOW() WHERE email= '$email'") or die('Error174');
     }
     header("location:account.php?q=result&eid=$eid");
+  
   } else {
     header("location:account.php?q=result&eid=$eid");
   }

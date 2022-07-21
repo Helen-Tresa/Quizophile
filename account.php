@@ -195,25 +195,25 @@ var countdownTimer = setInterval('secondPassed()', 1000);
 
           <!--quiz start-->
           <?php
-          if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2 ) {
+          if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2 && (@$_GET['m'])==0) {
             $eid = @$_GET['eid'];
             $sn = @$_GET['n'];
             $total = @$_GET['t'];
             $m=@$_GET['m'];
-            if(@$_GET['m']==0){$q = mysqli_query($con, "SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' ");}
-            else if(@$_GET['m']==1){$q = mysqli_query($con, "SELECT * FROM squestions WHERE eid='$eid' AND sn='$sn' ");}
+            $q = mysqli_query($con, "SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' ");
+            
             //echo '<script>document.getElementById(\'mybtn\').disabled = true;</script>';
             
             while ($row = mysqli_fetch_array($q)) {
               $qid = $row['qid'];
-              if(@$_GET['m']==0){
+              
                 $q1 = mysqli_query($con, "SELECT time FROM questions WHERE qid='$qid'  ");
-              }else if(@$_GET['m']==1){$q1 = mysqli_query($con, "SELECT time FROM squestions WHERE qid='$qid'  ");}
+              
 
               
-              $row = mysqli_fetch_array($q1);
-              $time = $row['time'];
-              echo $qid;
+              $row1 = mysqli_fetch_array($q1);
+              $time = $row1['time'];
+              
             }
             echo '<script>
 var seconds = ' . $time . ' ;
@@ -242,7 +242,7 @@ function secondPassed() {
       clearInterval(countdownTimer);
       document.getElementById(\'countdown\').innerHTML = "Buzz Buzz...";
     //  window.location ="update.php?q=quiz&step=2&eid=' . $_GET['eid'] . '&n=' . $_GET['n'] . '&t=' . $_GET['t'] . '&endquiz=end";
-    window.location ="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&endquiz=end";
+    window.location ="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'&endquiz=end";
   
 } 
   else {    
@@ -253,56 +253,123 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
 </script>';
 
 
-if(@$_GET['m']==0){
+
             echo '<form action="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'" method="POST"  class="form-horizontal">
 <br />';
             //finish quiz button
             echo '<font size="3" style="margin-left:100px;font-family:\'typo\' font-size:20px; font-weight:bold;color:darkred">Time Left : </font><span class="timer btn btn-default" style="margin-left:20px;"><font style="font-family:\'typo\';font-size:20px;font-weight:bold;color:darkblue" id="countdown"></font></span><span class="timer btn btn-primary" style="margin-left:50px" onclick="end()"><span class=" glyphicon glyphicon-off"></span>&nbsp;&nbsp;<font style="font-size:12px;font-weight:bold">Finish Quiz</font></span>';
 
 
-            $q = mysqli_query($con, "SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' ");
+            $q3 = mysqli_query($con, "SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' ");
             echo '<div class="panel" style="margin:5%">';
-            while ($row = mysqli_fetch_array($q)) {
-              $qns = $row['qns'];
-              $qid = $row['qid'];
+            while ($row3 = mysqli_fetch_array($q3)) {
+              $qns = $row3['qns'];
+              $qid = $row3['qid'];
               echo '<b>Question &nbsp;' . $sn . '&nbsp;::<br />' . $qns . '</b><br /><br />';
             }
-            $q = mysqli_query($con, "SELECT * FROM options WHERE qid='$qid' ");
+            $q4 = mysqli_query($con, "SELECT * FROM options WHERE qid='$qid' ");
 
 
-            while ($row = mysqli_fetch_array($q)) {
-              $option = $row['option'];
-              $optionid = $row['optionid'];
+            while ($row4 = mysqli_fetch_array($q4)) {
+              $option = $row4['option'];
+              $optionid = $row4['optionid'];
               echo '<input type="radio" name="ans" value="' . $optionid . '">' . $option . '<br /><br />';
             }
             echo '<br /><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
             //header("location:dash.php?q=4&step=2&eid=$id&n=$total");
 
-     }else if(@$_GET['m']==1){
-
-          echo '<form action="shortdb.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'" method="POST"  class="form-horizontal">
-          <br />';
-                      //finish quiz button
-                      echo '<font size="3" style="margin-left:100px;font-family:\'typo\' font-size:20px; font-weight:bold;color:darkred">Time Left : </font><span class="timer btn btn-default" style="margin-left:20px;"><font style="font-family:\'typo\';font-size:20px;font-weight:bold;color:darkblue" id="countdown"></font></span><span class="timer btn btn-primary" style="margin-left:50px" onclick="end()"><span class=" glyphicon glyphicon-off"></span>&nbsp;&nbsp;<font style="font-size:12px;font-weight:bold">Finish Quiz</font></span>';
-          
-          
-                      $q = mysqli_query($con, "SELECT * FROM squestions WHERE eid='$eid' AND sn='$sn' ");
-                      echo '<div class="panel" style="margin:5%">';
-                      while ($row = mysqli_fetch_array($q)) {
-                        $qns = $row['qns'];
-                        $qid = $row['qid'];
-                        echo '<b>Question &nbsp;' . $sn . '&nbsp;::<br />' . $qns . '</b><br /><br />';
-                      }
+     
                       
-                        echo '<input type="text" width="50px" name="ans"  placeholder="Enter answer (space separated)"><br /><br />';
-                      
-                      echo '<br /><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
-                      //header("location:dash.php?q=4&step=2&eid=$id&n=$total");
+        }
+
+
+
+        //here
+
+        
+        if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2 && (@$_GET['m'])==1) {
+          $eid = @$_GET['eid'];
+          $sn = @$_GET['n'];
+          $total = @$_GET['t'];
+          $m=1;
+          $q6 = mysqli_query($con, "SELECT * FROM squestions WHERE eid='$eid' AND sn='$sn' ");
+          //echo '<script>document.getElementById(\'mybtn\').disabled = true;</script>';
           
+          while ($row6 = mysqli_fetch_array($q6)) {
+            $qid = $row6['qid'];
+           $q5 = mysqli_query($con, "SELECT time FROM squestions WHERE qid='$qid'  ");
+
+            
+            $row5 = mysqli_fetch_array($q5);
+            $time = $row5['time'];
+            echo $m;
+          }
+          echo '<script>
+var seconds = ' . $time . ' ;
+function end(){
+
+  window.location ="account.php?q=result&eid=' . $_GET['eid'] . '&endquiz=end";
+
+}
+function enable(){
+document.getElementById("sbutton").removeAttribute("disabled");
+
+}
+function frmreset(){
+document.getElementById("sbutton").setAttribute("disabled","true");
+document.getElementById("qform").reset();
+}
+function secondPassed() {
+
+var minutes = Math.round((seconds - 30)/60);
+var remainingSeconds = seconds % 60;
+if (remainingSeconds < 10) {
+    remainingSeconds = "0" + remainingSeconds; 
+}
+document.getElementById(\'countdown\').innerHTML = minutes + ":" +    remainingSeconds;
+if (seconds <= 0) {
+    clearInterval(countdownTimer);
+    document.getElementById(\'countdown\').innerHTML = "Buzz Buzz...";
+  //  window.location ="update.php?q=quiz&step=2&eid=' . $_GET['eid'] . '&n=' . $_GET['n'] . '&t=' . $_GET['t'] . '&endquiz=end";
+  window.location ="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'&endquiz=end";
+
+} 
+else {    
+    seconds--;
+}
+}
+var countdownTimer = setInterval(\'secondPassed()\', 1000);
+</script>';
 
 
-        }
-        }
+
+
+        echo '<form action="shortdb.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'" method="POST"  class="form-horizontal">
+        <br />';
+                    //finish quiz button
+                    echo '<font size="3" style="margin-left:100px;font-family:\'typo\' font-size:20px; font-weight:bold;color:darkred">Time Left : </font><span class="timer btn btn-default" style="margin-left:20px;"><font style="font-family:\'typo\';font-size:20px;font-weight:bold;color:darkblue" id="countdown"></font></span><span class="timer btn btn-primary" style="margin-left:50px" onclick="end()"><span class=" glyphicon glyphicon-off"></span>&nbsp;&nbsp;<font style="font-size:12px;font-weight:bold">Finish Quiz</font></span>';
+        
+        
+                    $q7 = mysqli_query($con, "SELECT * FROM squestions WHERE eid='$eid' AND sn='$sn' ");
+                    echo '<div class="panel" style="margin:5%">';
+                    while ($row7 = mysqli_fetch_array($q7)) {
+                      $qns = $row7['qns'];
+                      $qid = $row7['qid'];
+                      echo '<b>Question &nbsp;' . $sn . '&nbsp;::<br />' . $qns . '</b><br /><br />';
+                      echo $m;
+                    }
+                    
+                      echo '<input type="text" width="50px" name="ans"  placeholder="Enter answer (space separated)"><br /><br />';
+                    
+                    echo '<br /><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
+                    //header("location:dash.php?q=4&step=2&eid=$id&n=$total");
+        
+
+
+      
+      }
+
+
           //result display
           if (@$_GET['q'] == 'result' && @$_GET['eid']) {
             $eid = @$_GET['eid'];
