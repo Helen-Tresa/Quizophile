@@ -15,7 +15,7 @@
  	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
 
 <script>
-$(function () {
+/*$(function () {
     $(document).on( 'scroll', function(){
         console.log('scroll top : ' + $(window).scrollTop());
         if($(window).scrollTop()>=$(".logo").height())
@@ -28,7 +28,7 @@ $(function () {
              $(".navbar").removeClass("navbar-fixed-top");
         }
     });
-});</script>
+});*/</script>
 </head>
 
 <body  style="background:#eee;">
@@ -110,12 +110,14 @@ $q12=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$e
 $rowcount=mysqli_num_rows($q12);	
 if($rowcount == 0){
 	echo '<tr><td>'.$c++.'</td><td>'.$title.'</td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
-	<td><b><a href="account.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:#99cc32"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Start</b></span></a></b></td></tr>';
+	<td><b><a href="account.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:#99cc32"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Start</b></span></a></b></td>
+  <td style="vertical-align:middle"><b><a href="account.php?q=4&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>';
 }
 else
 {
 echo '<tr style="color:#99cc32"><td>'.$c++.'</td><td>'.$title.'&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
-	<td><b><a href="update.php?q=quizre&step=25&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:red"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Restart</b></span></a></b></td></tr>';
+	<td><b><a href="update.php?q=quizre&step=25&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:red"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Restart</b></span></a></b></td>
+  <td style="vertical-align:middle"><b><a href="account.php?q=4&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>';
 }
 }
 $c=0;
@@ -286,13 +288,7 @@ echo '
 </div>
 
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="desc"></label>  
-  <div class="col-md-12">
-  <textarea rows="8" cols="8" name="desc" class="form-control" placeholder="Write description here..."></textarea>  
-  </div>
-</div>
+
 
 
 <div class="form-group">
@@ -373,6 +369,15 @@ echo '<b>Question number&nbsp;'.$i.'&nbsp;:</><br /><!-- Text input-->
   <option value="b">option b</option>
   <option value="c">option c</option>
   <option value="d">option d</option> </select><br /><br />
+
+  <!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="'.$i.'4"></label>  
+  <div class="col-md-12">
+  <input id="'.$i.'img" name="'.$i.'img" placeholder="description" class="form-control input-md" type="text">
+    
+  </div>
+</div>
   
   <div class="form-group">
   <label class="col-md-12 control-label" for="'.$i.'4"></label>  
@@ -420,6 +425,8 @@ $c=0;
 echo '</table></div>';
 
 }
+
+
 ?>
 
 

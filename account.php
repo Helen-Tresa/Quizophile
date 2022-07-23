@@ -20,8 +20,37 @@
     echo '<script>alert("' . @$_GET['w'] . '");</script>';
   }
   ?>
+<!--closing tab-->
+<script type="text/javascript">
+function disableNewTabClick() {  
+    var listCtrl = document.getElementsByTagName('a');  
+    for (var i = 0; i < listCtrl.length; i++) {  
+        listCtrl[i].onmousedown = function(event) {  
+            if (!event) event = window.event;  
+            if (event.ctrlKey) {  
+                alert("Functionality for Opening links in a new tab/window is disabled !");  
+                return false;  
+            }  
+            if (event.shiftKey) {  
+                alert("Functionality for Opening links in a new tab/window is disabled !");  
+                return false;  
+            }  
+            if (event.shiftKey && event.ctrlKey) {  
+                alert("Functionality for Opening links in a new tab/window is disabled !");  
+                return false;  
+            }  
+        }  
+    }  
+} 
+</script>
+
+
   <!--alert message end-->
-  <script type="text/javascript">  function preventBack() {window.history.forward();}  setTimeout("preventBack()", 0);  window.onunload = function () {null};
+  <script type="text/javascript">
+  function preventBack() {window.history.forward(); }setTimeout("preventBack()", 0);
+   window.onunload = function () {
+    document.getElementById("countdown").innerHTML=0;
+    }
   function home()
 {
   document.getElementById("mybtn").disabled = true;
@@ -147,25 +176,28 @@ function home()
 </script>";
 
               //here
-              echo '<tr><td style="vertical-align:middle">' . $c++ . '</td><td style="vertical-align:middle">' . $title . '</td><td style="vertical-align:middle">' . $total . '</td><td style="vertical-align:middle">+' . $correct . '</td><td style="vertical-align:middle">-' . $wrong . '</td><td style="vertical-align:middle">' . $correct * $total . '</td><td style="vertical-align:middle">' . $time . '&nbsp;min</td>
-  <td style="vertical-align:middle"><b><a href="account.php?q=quiz&step=2&eid=' . $eid . '&n=1&t=' . $total . '&m=' . $j . '" class="btn" onclick="home()" style="color:#FFFFFF;background:darkgreen;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Start</b></span></a></b></td></tr>
-  <script> function home(){document.getElementById(\'mybtn\').disabled = true;sleep(10);}</script>
-  ';
-              /*if ($rowcount == 0) {
+            /*  echo '<tr><td style="vertical-align:middle">' . $c++ . '</td><td style="vertical-align:middle">' . $title . '</td><td style="vertical-align:middle">' . $total . '</td><td style="vertical-align:middle">+' . $correct . '</td><td style="vertical-align:middle">-' . $wrong . '</td><td style="vertical-align:middle">' . $correct * $total . '</td><td style="vertical-align:middle">' . $time . '&nbsp;min</td>
+  <td style="vertical-align:middle"><b><a href="account.php?q=quiz&step=2&eid=' . $eid . '&n=1&t=' . $total . '&m=' . $j . '" class="btn" onclick="home()" style="color:#FFFFFF;background:darkgreen;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Start</b></span></a></b></td>
+  <td style="vertical-align:middle"><b><a href="account.php?q=4&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>
+  
+  ';*/
+             if ($rowcount == 0) {
                 //echo '<tr><td>' . $c++ . '</td><td>' . $title . '</td><td>' . $total . '</td><td>' . $sahi * $total . '</td><td>' . $time . '&nbsp;min</td>
 	//<td><b><a href="account.php?q=quiz&step=2&eid=' . $eid . '&n=1&t=' . $total . '" class="pull-right btn sub1" style="margin:0px;background:#99cc32"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Start</b></span></a></b></td></tr>';
               
   echo '<tr><td style="vertical-align:middle">' . $c++ . '</td><td style="vertical-align:middle">' . $title . '</td><td style="vertical-align:middle">' . $total . '</td><td style="vertical-align:middle">+' . $correct . '</td><td style="vertical-align:middle">-' . $wrong . '</td><td style="vertical-align:middle">' . $correct * $total . '</td><td style="vertical-align:middle">' . $time . '&nbsp;min</td>
-  <td style="vertical-align:middle"><b><a href="account.php?q=quiz&step=2&eid=' . $eid . '&n=1&t=' . $total . '&m=' . $j . '" class="btn" style="color:#FFFFFF;background:darkgreen;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Start</b></span></a></b></td></tr>';
+  <td style="vertical-align:middle"><b><a href="account.php?q=quiz&step=2&eid=' . $eid . '&n=1&t=' . $total . '&m=' . $j . '" class="btn" style="color:#FFFFFF;background:darkgreen;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Start</b></span></a></b></td>
+  <td style="vertical-align:middle"><b><a href="account.php?q=4&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>';
 
               } else {
                 //echo '<tr style="color:#99cc32"><td>' . $c++ . '</td><td>' . $title . '&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td><td>' . $total . '</td><td>' . $sahi * $total . '</td><td>' . $time . '&nbsp;min</td>
 	//<td><b><a href="account.php?q=result&eid=' . $eid . '&n=1&t=' . $total . '" class="pull-right btn sub1" style="margin:0px;background:red"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;<span class="title1"><b>View Result</b></span></a></b></td></tr>';
               
   echo '<tr style="color:darkgreen"><td style="vertical-align:middle">' . $c++ . '</td><td style="vertical-align:middle">' . $title . '&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td><td style="vertical-align:middle">' . $total . '</td><td style="vertical-align:middle">+' . $correct . '</td><td style="vertical-align:middle">-' . $wrong . '</td><td style="vertical-align:middle">' . $correct * $total . '</td><td style="vertical-align:middle">' . $time . '&nbsp;min</td>
-  <td style="vertical-align:middle"><b><a href="account.php?q=result&eid=' . $eid . '" class="btn" style="margin:0px;background:darkred;color:white";padding:7px;padding-left:10px;padding-right:10px>&nbsp;<span class="title1"><b>View Result</b></span></a></b></td></tr>';
+  <td style="vertical-align:middle"><b><a href="account.php?q=result&eid=' . $eid . '&m='.$j.'" class="btn" style="margin:0px;background:darkred;color:white";padding:7px;padding-left:10px;padding-right:10px>&nbsp;<span class="title1"><b>View Result</b></span></a></b></td>
+  <td style="vertical-align:middle"><b><a href="account.php?q=4&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>';
 
-              }*/
+              }
             }
             $c = 0;
             echo '</table></div>';
@@ -219,7 +251,7 @@ var countdownTimer = setInterval('secondPassed()', 1000);
 var seconds = ' . $time . ' ;
 function end(){
   
-    window.location ="account.php?q=result&eid=' . $_GET['eid'] . '&endquiz=end";
+    window.location ="account.php?q=result&eid=' . $_GET['eid'] . '&endquiz=end&m='.$m.'";
   
 }
 function enable(){
@@ -257,13 +289,16 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
             echo '<form action="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'" method="POST"  class="form-horizontal">
 <br />';
             //finish quiz button
-            echo '<font size="3" style="margin-left:100px;font-family:\'typo\' font-size:20px; font-weight:bold;color:darkred">Time Left : </font><span class="timer btn btn-default" style="margin-left:20px;"><font style="font-family:\'typo\';font-size:20px;font-weight:bold;color:darkblue" id="countdown"></font></span><span class="timer btn btn-primary" style="margin-left:50px" onclick="end()"><span class=" glyphicon glyphicon-off"></span>&nbsp;&nbsp;<font style="font-size:12px;font-weight:bold">Finish Quiz</font></span>';
+            
+            echo '<font size="3" style="margin-left:100px;font-family:\'typo\' font-size:20px; font-weight:bold;color:darkred">Time Left : </font>
+            <span class="timer btn btn-default" style="margin-left:20px;"><font style="font-family:\'typo\';font-size:20px;font-weight:bold;color:darkblue" id="countdown"></font></span>
+            <span class="timer btn btn-primary" style="margin-left:50px" onclick="end()"><span class=" glyphicon glyphicon-off"></span>&nbsp;&nbsp;<font style="font-size:12px;font-weight:bold">Finish Quiz</font></span>';
 
 
             $q3 = mysqli_query($con, "SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' ");
             echo '<div class="panel" style="margin:5%">';
             while ($row3 = mysqli_fetch_array($q3)) {
-              $qns = $row3['qns'];
+              $qns = strip_tags($row3['qns']);
               $qid = $row3['qid'];
               echo '<b>Question &nbsp;' . $sn . '&nbsp;::<br />' . $qns . '</b><br /><br />';
             }
@@ -302,13 +337,13 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
             
             $row5 = mysqli_fetch_array($q5);
             $time = $row5['time'];
-            echo $m;
+           
           }
           echo '<script>
 var seconds = ' . $time . ' ;
 function end(){
 
-  window.location ="account.php?q=result&eid=' . $_GET['eid'] . '&endquiz=end";
+  window.location ="account.php?q=result&eid=' . $_GET['eid'] . '&endquiz=end&m='.$m.'";
 
 }
 function enable(){
@@ -347,7 +382,10 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
         echo '<form action="shortdb.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'" method="POST"  class="form-horizontal">
         <br />';
                     //finish quiz button
-                    echo '<font size="3" style="margin-left:100px;font-family:\'typo\' font-size:20px; font-weight:bold;color:darkred">Time Left : </font><span class="timer btn btn-default" style="margin-left:20px;"><font style="font-family:\'typo\';font-size:20px;font-weight:bold;color:darkblue" id="countdown"></font></span><span class="timer btn btn-primary" style="margin-left:50px" onclick="end()"><span class=" glyphicon glyphicon-off"></span>&nbsp;&nbsp;<font style="font-size:12px;font-weight:bold">Finish Quiz</font></span>';
+                    echo '<font size="3" style="margin-left:100px;font-family:\'typo\' font-size:20px; font-weight:bold;color:darkred">Time Left : </font><span class="timer btn btn-default" style="margin-left:20px;"><font style="font-family:\'typo\';font-size:20px;font-weight:bold;color:darkblue" id="countdown"></font></span>
+                    <span class="timer btn btn-primary" style="margin-left:50px" onclick="end()">
+                    <span class=" glyphicon glyphicon-off"></span>&nbsp;&nbsp;
+                    <font style="font-size:12px;font-weight:bold">Finish Quiz</font></span>';
         
         
                     $q7 = mysqli_query($con, "SELECT * FROM squestions WHERE eid='$eid' AND sn='$sn' ");
@@ -356,7 +394,7 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
                       $qns = $row7['qns'];
                       $qid = $row7['qid'];
                       echo '<b>Question &nbsp;' . $sn . '&nbsp;::<br />' . $qns . '</b><br /><br />';
-                      echo $m;
+                      
                     }
                     
                       echo '<input type="text" width="50px" name="ans"  placeholder="Enter answer (space separated)"><br /><br />';
@@ -400,7 +438,7 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
             }
             echo '</table></div>';
             //here i copied
-
+    //detailed analysis
             echo '<tr></tr></table></div><div class="panel"><br /><h3 align="center" style="font-family:calibri">:: Detailed Analysis ::</h3><br /><ol style="font-size:20px;font-weight:bold;font-family:calibri;margin-top:20px">';
            if(@$_GET['m']==0){
             $q = mysqli_query($con, "SELECT * FROM questions WHERE eid='$_GET[eid]'") or die('Error197');
@@ -408,6 +446,7 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
             while ($row = mysqli_fetch_array($q)) {
                 $question = $row['qns'];
                 $qid      = $row['qid'];
+                $img= $row['desc'];
                 $q2 = mysqli_query($con, "SELECT * FROM user_answer WHERE eid='$_GET[eid]' AND qid='$qid' AND email='$_SESSION[email]'") or die('Error197');
                 if (mysqli_num_rows($q2) > 0) {
                     $row1         = mysqli_fetch_array($q2);
@@ -432,19 +471,27 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
                     echo '<li><div style="font-size:16px;font-weight:bold;font-family:calibri;margin-top:20px;background-color:lightgreen;padding:10px;word-wrap:break-word;border:2px solid darkgreen;border-radius:10px;">' . $question . ' <span class="glyphicon glyphicon-ok" style="color:darkgreen"></span></div><br />';
                     echo '<font style="font-size:14px;color:darkgreen"><b>Your Answer: </b></font><font style="font-size:14px;">' . $ans . '</font><br />';
                     echo '<font style="font-size:14px;color:darkgreen"><b>Correct Answer: </b></font><font style="font-size:14px;">' . $correctans . '</font><br />';
-                } 
+                    echo '<font style="font-size:14px;color:black"><b>Explanation: </b></font><font style="font-size:14px;">' . $img . '</font><br />';
+                    
+                  } 
                 else if ($ans == "Unanswered") {
                     echo '<li><div style="font-size:16px;font-weight:bold;font-family:calibri;margin-top:20px;background-color:#f7f576;padding:10px;word-wrap:break-word;border:2px solid #b75a0e;border-radius:10px;">' . $question . ' </div><br />';
                     echo '<font style="font-size:14px;color:darkgreen"><b>Correct Answer: </b></font><font style="font-size:14px;">' . $correctans . '</font><br />';
-                } 
+                    echo '<font style="font-size:14px;color:black"><b>Explanation: </b></font><font style="font-size:14px;">' . $img . '</font><br />';
+                  } 
                 else {
                     echo '<li><div style="font-size:16px;font-weight:bold;font-family:calibri;margin-top:20px;background-color:#f99595;padding:10px;word-wrap:break-word;border:2px solid darkred;border-radius:10px;">' . $question . ' <span class="glyphicon glyphicon-remove" style="color:red"></span></div><br />';
                     echo '<font style="font-size:14px;color:darkgreen"><b>Your Answer: </b></font><font style="font-size:14px;">' . $ans . '</font><br />';
                     echo '<font style="font-size:14px;color:red"><b>Correct Answer: </b></font><font style="font-size:14px;">' . $correctans . '</font><br />';
-                    
+                    echo '<font style="font-size:14px;color:black"><b>Explanation: </b></font><font style="font-size:14px;">' . $img . '</font><br />';
                 }
                 echo "<br /></li>";
             }
+
+
+
+
+            //shortanswer
           }else{$q = mysqli_query($con, "SELECT * FROM squestions WHERE eid='$_GET[eid]'") or die('Error197');
             while ($row = mysqli_fetch_array($q)) {
               $question = $row['qns'];
@@ -523,6 +570,37 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
 <tr style="color:red"><td><b>Rank</b></td><td><b>Name</b></td><td><b>Gender</b></td><td><b>College</b></td><td><b>Score</b></td></tr>';
             $c = 0;
             while ($row = mysqli_fetch_array($q)) {
+              $e = $row['email'];
+              $s = $row['score'];
+              $q12 = mysqli_query($con, "SELECT * FROM user WHERE email='$e' ") or die('Error231');
+              while ($row = mysqli_fetch_array($q12)) {
+                $name = $row['name'];
+                $gender = $row['gender'];
+                $college = $row['college'];
+              }
+              $c++;
+              echo '<tr><td style="color:#99cc32"><b>' . $c . '</b></td><td>' . $name . '</td><td>' . $gender . '</td><td>' . $college . '</td><td>' . $s . '</td><td>';
+            }
+            echo '</table></div>';
+          }
+
+
+
+          //ranking-quiz wise
+
+          if (@$_GET['q'] == 4) {
+            $eid=@$_GET['eid'];
+            $q = mysqli_query($con, "SELECT * FROM history WHERE eid='$eid'  ORDER BY score DESC ") or die('Error223');
+            $q2=mysqli_query($con, "SELECT * FROM quiz WHERE eid='$eid'  ") or die('Error223');
+            $row1 = mysqli_fetch_array($q2);
+            echo '<h1>QUIZ NAME : '.$row1['title'].'</H1>';
+            
+            echo  '<div class="panel title">
+<table class="table table-striped title1" >
+<tr style="color:red"><td><b>Rank</b></td><td><b>Name</b></td><td><b>Gender</b></td><td><b>College</b></td><td><b>Score</b></td></tr>';
+            $c = 0;
+            while ($row = mysqli_fetch_array($q)) {
+              
               $e = $row['email'];
               $s = $row['score'];
               $q12 = mysqli_query($con, "SELECT * FROM user WHERE email='$e' ") or die('Error231');

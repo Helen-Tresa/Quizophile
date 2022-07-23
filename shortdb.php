@@ -75,15 +75,17 @@ if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
   $ans = $_POST['ans'];
 
   $qid = @$_GET['qid'];
+  $k=0;
   $q = mysqli_query($con, "SELECT * FROM answer WHERE qid='$qid' ");
   while ($row = mysqli_fetch_array($q)) {
     $corans = $row['ans'];
     $input=$row['input'];
   }
+  if($ans!=''){
   $q = mysqli_query($con, "INSERT INTO user_answer VALUES(NULL,'$eid','$qid' ,'null','$ans','$email')") or die('Error');
-
+  }
   //here
-  $k = 0.0;
+ 
   $keyword = explode(" ", $corans);
   $userans = explode(" ", $ans); //array
   $c1 = sizeof($userans);
@@ -136,11 +138,23 @@ if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
       $r = $row['sahi'];
     }
     $r++;
-    (float)$newsahi = (float)(((float)$k /(float) $input) * (float)$sahi);
-    (float)$s = (float)$s + (float)$newsahi;
+    $newsahi = $k /$input *$sahi;
+    $s = $s + $newsahi;
     
     $q = mysqli_query($con, "UPDATE `history` SET `score`=$s,`level`=$sn,`sahi`=$r, date= NOW()  WHERE  email = '$email' AND eid = '$eid'") or die('Error124');
-  } else {
+  }else if($ans==''){
+//unattempted
+
+if ($sn == 1) {
+  $q = mysqli_query($con, "INSERT INTO history VALUES('$email','$eid' ,'0','0','0','0',NOW() )") or die('Error137');
+}
+
+  }
+  
+  
+  
+  
+  else {
     $q = mysqli_query($con, "SELECT * FROM quiz WHERE eid='$eid' ") or die('Error129');
 
     while ($row = mysqli_fetch_array($q)) {
@@ -149,8 +163,8 @@ if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
     if ($sn == 1) {
       $q = mysqli_query($con, "INSERT INTO history VALUES('$email','$eid' ,'0','0','0','0',NOW() )") or die('Error137');
     }
-    $q = mysqli_query($con, "SELECT * FROM history WHERE eid='$eid' AND email='$email' ") or die('Error139');
-    while ($row = mysqli_fetch_array($q)) {
+    $q1 = mysqli_query($con, "SELECT * FROM history WHERE eid='$eid' AND email='$email' ") or die('Error139');
+    while ($row = mysqli_fetch_array($q1)) {
       $s = $row['score'];
       $w = $row['wrong'];
     }

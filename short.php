@@ -215,7 +215,7 @@ echo '<div class="form-group">
 <?php if(@$_GET['q']==7) {
 
 $result = mysqli_query($con,"SELECT * FROM quiz where m_s=1 ORDER BY date DESC ") or die('Error');
-echo  '<div class="panel"><table class="table table-striped title1">
+echo  '<br><br><br><div class="panel"><table class="table table-striped title1">
 <tr><td><b>S.N.</b></td><td><b>Topic</b></td><td><b>Total question</b></td><td><b>Marks</b></td><td><b>Time limit</b></td><td></td></tr>';
 $c=1;
 while($row = mysqli_fetch_array($result)) {

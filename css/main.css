@@ -38,11 +38,13 @@ font: 15px "Century Gothic", "Times Roman", sans-serif;
 .title
 {
 font-family:'typo';
+
 }
+
 
 .header
 {
-background:#202020;
+background:#070000;
 height:70px;
 }
 .logo

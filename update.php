@@ -68,7 +68,8 @@ if (isset($_SESSION['key'])) {
       $qid = uniqid();
       $qns = $_POST['qns' . $i];
       $t = $_POST[$i . '5'];
-      $q3 = mysqli_query($con, "INSERT INTO questions VALUES  ('$eid','$qid','$qns' , '$ch' , '$i','$t')");
+      $img=$_POST[$i .'img'];
+      $q3 = mysqli_query($con, "INSERT INTO questions VALUES  ('$eid','$qid','$qns' , '$ch' , '$i','$t','$img')");
       $oaid = uniqid();
       $obid = uniqid();
       $ocid = uniqid();
@@ -158,6 +159,13 @@ if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
     $w++;
     $s = $s - $wrong;
     $q = mysqli_query($con, "UPDATE `history` SET `score`=$s,`level`=$sn,`wrong`=$w, date=NOW() WHERE  email = '$email' AND eid = '$eid'") or die('Error147');
+  }
+  else{
+//unattempted
+if ($sn == 1) {
+  $q = mysqli_query($con, "INSERT INTO history VALUES('$email','$eid' ,'0','0','0','0',NOW() )") or die('Error137');
+}
+
   }
   if ($sn != $total) {
     $sn++;
