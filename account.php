@@ -176,12 +176,12 @@ function home()
 </script>";
 
               //here
-            /*  echo '<tr><td style="vertical-align:middle">' . $c++ . '</td><td style="vertical-align:middle">' . $title . '</td><td style="vertical-align:middle">' . $total . '</td><td style="vertical-align:middle">+' . $correct . '</td><td style="vertical-align:middle">-' . $wrong . '</td><td style="vertical-align:middle">' . $correct * $total . '</td><td style="vertical-align:middle">' . $time . '&nbsp;min</td>
+              echo '<tr><td style="vertical-align:middle">' . $c++ . '</td><td style="vertical-align:middle">' . $title . '</td><td style="vertical-align:middle">' . $total . '</td><td style="vertical-align:middle">+' . $correct . '</td><td style="vertical-align:middle">-' . $wrong . '</td><td style="vertical-align:middle">' . $correct * $total . '</td><td style="vertical-align:middle">' . $time . '&nbsp;min</td>
   <td style="vertical-align:middle"><b><a href="account.php?q=quiz&step=2&eid=' . $eid . '&n=1&t=' . $total . '&m=' . $j . '" class="btn" onclick="home()" style="color:#FFFFFF;background:darkgreen;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Start</b></span></a></b></td>
   <td style="vertical-align:middle"><b><a href="account.php?q=4&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>
   
-  ';*/
-             if ($rowcount == 0) {
+  ';
+            /* if ($rowcount == 0) {
                 //echo '<tr><td>' . $c++ . '</td><td>' . $title . '</td><td>' . $total . '</td><td>' . $sahi * $total . '</td><td>' . $time . '&nbsp;min</td>
 	//<td><b><a href="account.php?q=quiz&step=2&eid=' . $eid . '&n=1&t=' . $total . '" class="pull-right btn sub1" style="margin:0px;background:#99cc32"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Start</b></span></a></b></td></tr>';
               
@@ -197,7 +197,7 @@ function home()
   <td style="vertical-align:middle"><b><a href="account.php?q=result&eid=' . $eid . '&m='.$j.'" class="btn" style="margin:0px;background:darkred;color:white";padding:7px;padding-left:10px;padding-right:10px>&nbsp;<span class="title1"><b>View Result</b></span></a></b></td>
   <td style="vertical-align:middle"><b><a href="account.php?q=4&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>';
 
-              }
+              }*/
             }
             $c = 0;
             echo '</table></div>';
@@ -227,6 +227,7 @@ var countdownTimer = setInterval('secondPassed()', 1000);
 
           <!--quiz start-->
           <?php
+          //mcq quiz
           if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2 && (@$_GET['m'])==0) {
             $eid = @$_GET['eid'];
             $sn = @$_GET['n'];
@@ -247,6 +248,19 @@ var countdownTimer = setInterval('secondPassed()', 1000);
               $time = $row1['time'];
               
             }
+
+
+          /*  $_SESSION["duration"]=$time;
+            $_SESSION["start_time"]=date("Y-m-d H:i:s");
+            $end_time=date('Y-m-d H:i:s',strtotime('+'.$_SESSION["duration"].'seconds',strtotime($_SESSION["start_time"])));
+
+            $_SESSION["end_time"]=$end_time;
+
+            echo '<script type="text/javascript">
+window.location="time.php";
+</script>';*/
+
+
             echo '<script>
 var seconds = ' . $time . ' ;
 function end(){
@@ -397,8 +411,12 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
                       
                     }
                     
-                      echo '<input type="text" width="50px" name="ans"  placeholder="Enter answer (space separated)"><br /><br />';
+                      echo '<input type="text" name="ans"  class="form-control input-md" placeholder="Enter answer (space separated)"><br /><br />';
                     
+
+                      
+
+
                     echo '<br /><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
                     //header("location:dash.php?q=4&step=2&eid=$id&n=$total");
         

@@ -119,13 +119,6 @@ echo '
   </div>
 </div>
 
-/*<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="desc"></label>  
-  <div class="col-md-12">
-  <textarea rows="8" cols="8" name="desc" class="form-control" placeholder="Write description here..."></textarea>  
-  </div>
-</div>*/
 
 
 <div class="form-group">
@@ -167,7 +160,7 @@ echo '<b>Question number&nbsp;'.$i.'&nbsp;:</><br /><!-- Text input-->
 <div class="form-group">
   <label class="col-md-12 control-label" for="'.$i.'1"></label>  
   <div class="col-md-12">
-  <input id="ans'.$i.'" name="ans'.$i.'" placeholder="Enter keywords (space separated)" class="form-control input-md" type="text">
+  <input id="ans'.$i.'" name="ans'.$i.'"  placeholder="Enter keywords (space separated)" class="form-control input-md" type="text">
     
   </div>
 </div>
