@@ -17,7 +17,7 @@ if (isset($_SESSION['key'])) {
     $r4 = mysqli_query($con, "DELETE FROM quiz WHERE eid='$eid' ") or die('Error');
     $r4 = mysqli_query($con, "DELETE FROM history WHERE eid='$eid' ") or die('Error');
 
-    header("location:short.php?q=7");
+    header("location:dash.php?q=7");
   }
 }
 
@@ -35,7 +35,7 @@ if (isset($_SESSION['key'])) {
     $id = uniqid();
     $q3 = mysqli_query($con, "INSERT INTO quiz VALUES  ('$id','$name' , '$sahi' , '$wrong','$total','$time' ,'null','$tag', NOW(),1)");
 
-    header("location:short.php?q=6&step=2&eid=$id&n=$total");
+    header("location:dash.php?q=6&step=2&eid=$id&n=$total");
   }
 }
 

@@ -80,8 +80,8 @@ echo '<span class="pull-right top title1" ><span class="log1"><span class="glyph
           <ul class="dropdown-menu">
             <li><a href="dash.php?q=4">Add MCQ Quiz</a></li>
             <li><a href="dash.php?q=5">Remove MCQ Quiz</a></li>
-            <li><a href="short.php?q=6">Add short answer Quiz</a></li>
-            <li><a href="short.php?q=7">Remove short answer Quiz</a></li>
+            <li><a href="dash.php?q=6">Add short answer Quiz</a></li>
+            <li><a href="dash.php?q=7">Remove short answer Quiz</a></li>
           </ul>
         </li>
       </ul>
@@ -111,13 +111,13 @@ $rowcount=mysqli_num_rows($q12);
 if($rowcount == 0){
 	echo '<tr><td>'.$c++.'</td><td>'.$title.'</td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
 	<td><b><a href="account.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:#99cc32"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Start</b></span></a></b></td>
-  <td style="vertical-align:middle"><b><a href="account.php?q=4&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>';
+  <td style="vertical-align:middle"><b><a href="dash.php?q=21&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>';
 }
 else
 {
 echo '<tr style="color:#99cc32"><td>'.$c++.'</td><td>'.$title.'&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
 	<td><b><a href="update.php?q=quizre&step=25&eid='.$eid.'&n=1&t='.$total.'" class="pull-right btn sub1" style="margin:0px;background:red"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Restart</b></span></a></b></td>
-  <td style="vertical-align:middle"><b><a href="account.php?q=4&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>';
+  <td style="vertical-align:middle"><b><a href="dash.php?q=21&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>';
 }
 }
 $c=0;
@@ -405,6 +405,161 @@ echo '<div class="form-group">
 }
 ?><!--add quiz step 2 end-->
 
+<!--add short answer quiz -->
+
+<!--add quiz start-->
+<?php
+if(@$_GET['q']==6 && !(@$_GET['step']) ) {
+echo ' 
+<div class="row"><center>
+<span class="title1" style="margin-left:40%;font-size:30px;"><br><b>Enter Quiz Details</b></span><br /><br /></center>
+ <div class="col-md-3"></div><div class="col-md-6">   <form class="form-horizontal title1" name="form" action="shortdb.php?q=addquiz"  method="POST">
+<fieldset>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="name"></label>  
+  <div class="col-md-12">
+  <input id="name" name="name" placeholder="Enter Quiz title" class="form-control input-md" type="text">
+    
+  </div>
+</div>
+
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="total"></label>  
+  <div class="col-md-12">
+  <input id="total" name="total" placeholder="Enter total number of questions" class="form-control input-md" type="number">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="right"></label>  
+  <div class="col-md-12">
+  <input id="right" name="right" placeholder="Enter marks on right answer" class="form-control input-md" min="0" type="number">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="wrong"></label>  
+  <div class="col-md-12">
+  <input id="wrong" name="wrong" placeholder="Enter minus marks on wrong answer without sign" class="form-control input-md" min="0" type="number">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="time"></label>  
+  <div class="col-md-12">
+  <input id="time" name="time" placeholder="Enter time limit for test in minute" class="form-control input-md" min="1" type="number">
+    
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="tag"></label>  
+  <div class="col-md-12">
+  <input id="tag" name="tag" placeholder="Enter #tag which is used for searching" class="form-control input-md" type="text">
+    
+  </div>
+</div>
+
+
+
+<div class="form-group">
+  <label class="col-md-12 control-label" for=""></label>
+  <div class="col-md-12"> 
+    <input  type="submit" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
+  </div>
+</div>
+
+</fieldset>
+</form></div>';
+
+
+
+}
+?>
+<!--add quiz end-->
+
+<!--add quiz step2 start-->
+<?php
+if(@$_GET['q']==6 && (@$_GET['step'])==2 ) {
+echo ' 
+<div class="row">
+<span class="title1" style="margin-left:40%;font-size:30px;"><b>Enter Question Details</b></span><br /><br />
+ <div class="col-md-3"></div><div class="col-md-6"><form class="form-horizontal title1" name="form" action="shortdb.php?q=addqns&n='.@$_GET['n'].'&eid='.@$_GET['eid'].' "  method="POST">
+<fieldset>
+';
+ 
+ for($i=1;$i<=@$_GET['n'];$i++)
+ {
+echo '<b>Question number&nbsp;'.$i.'&nbsp;:</><br /><!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="qns'.$i.' "></label>  
+  <div class="col-md-12">
+  <textarea rows="3" cols="5" name="qns'.$i.'" class="form-control" placeholder="Write question number '.$i.' here..."></textarea>  
+  </div>
+</div>
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="'.$i.'1"></label>  
+  <div class="col-md-12">
+  <input id="ans'.$i.'" name="ans'.$i.'"  placeholder="Enter keywords (space separated)" class="form-control input-md" type="text">
+    
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label class="col-md-12 control-label" for="'.$i.'1"></label>  
+  <div class="col-md-12">
+  <input id="input" name="input" placeholder="input answer count" class="form-control input-md" type="text">
+    
+  </div>
+</div>
+
+
+
+
+  
+  <div class="form-group">
+  <label class="col-md-12 control-label" for="'.$i.'4"></label>  
+  <div class="col-md-12">
+  <input id="'.$i.'5" name="'.$i.'5" placeholder="Enter time limit" class="form-control input-md" type="text">
+    
+  </div>
+</div>  '; 
+
+
+ }
+    
+echo '<div class="form-group">
+  <label class="col-md-12 control-label" for=""></label>
+  <div class="col-md-12"> 
+    <input  type="submit" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
+  </div>
+</div>
+
+</fieldset>
+</form></div>';
+
+
+
+}
+?><!--add quiz step 2 end-->
+
+
 <!--remove quiz-->
 <?php if(@$_GET['q']==5) {
 
@@ -427,6 +582,59 @@ echo '</table></div>';
 }
 
 
+//remove short answer quiz
+
+
+ if(@$_GET['q']==7) {
+
+$result = mysqli_query($con,"SELECT * FROM quiz where m_s=1 ORDER BY date DESC ") or die('Error');
+echo  '<br><br><br><div class="panel"><table class="table table-striped title1">
+<tr><td><b>S.N.</b></td><td><b>Topic</b></td><td><b>Total question</b></td><td><b>Marks</b></td><td><b>Time limit</b></td><td></td></tr>';
+$c=1;
+while($row = mysqli_fetch_array($result)) {
+	$title = $row['title'];
+	$total = $row['total'];
+	$sahi = $row['sahi'];
+    $time = $row['time'];
+	$eid = $row['eid'];
+	echo '<tr><td>'.$c++.'</td><td>'.$title.'</td><td>'.$total.'</td><td>'.$sahi*$total.'</td><td>'.$time.'&nbsp;min</td>
+	<td><b><a href="shortdb.php?q=rmquiz&eid='.$eid.'" class="pull-right btn sub1" style="margin:0px;background:red"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Remove</b></span></a></b></td></tr>';
+}
+$c=0;
+echo '</table></div>';
+
+}
+
+
+
+//ranking-quiz wise
+
+if (@$_GET['q'] == 21) {
+  $eid=@$_GET['eid'];
+  $q = mysqli_query($con, "SELECT * FROM history WHERE eid='$eid'  ORDER BY score DESC ") or die('Error223');
+  $q2=mysqli_query($con, "SELECT * FROM quiz WHERE eid='$eid'  ") or die('Error223');
+  $row1 = mysqli_fetch_array($q2);
+  echo '<h1>QUIZ NAME : '.$row1['title'].'</H1>';
+  
+  echo  '<div class="panel title">
+<table class="table table-striped title1" >
+<tr style="color:red"><td><b>Rank</b></td><td><b>Name</b></td><td><b>Gender</b></td><td><b>College</b></td><td><b>Score</b></td></tr>';
+  $c = 0;
+  while ($row = mysqli_fetch_array($q)) {
+    
+    $e = $row['email'];
+    $s = $row['score'];
+    $q12 = mysqli_query($con, "SELECT * FROM user WHERE email='$e' ") or die('Error231');
+    while ($row = mysqli_fetch_array($q12)) {
+      $name = $row['name'];
+      $gender = $row['gender'];
+      $college = $row['college'];
+    }
+    $c++;
+    echo '<tr><td style="color:#99cc32"><b>' . $c . '</b></td><td>' . $name . '</td><td>' . $gender . '</td><td>' . $college . '</td><td>' . $s . '</td><td>';
+  }
+  echo '</table></div>';
+}
 ?>
 
 

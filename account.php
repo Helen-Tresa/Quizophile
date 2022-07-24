@@ -201,7 +201,15 @@ function home()
             }
             $c = 0;
             echo '</table></div>';
-          } ?>
+            echo '<div class="panel" ><h5 align="center"s><b>You can only attempt the quiz once.<br>To mark your answer for evaluation, Click on the Submit button before the timer ends.</b></h5></div>';
+          
+          } 
+          
+          
+          
+          
+          
+          ?>
           <!--
 <span id="countdown" class="timer"></span>
 <script>
@@ -322,7 +330,7 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
             while ($row4 = mysqli_fetch_array($q4)) {
               $option = $row4['option'];
               $optionid = $row4['optionid'];
-              echo '<input type="radio" name="ans" value="' . $optionid . '">' . $option . '<br /><br />';
+              echo '<input type="radio" id="ans" name="ans" value="' . $optionid . '">' . $option . '<br /><br />';
             }
             echo '<br /><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
             //header("location:dash.php?q=4&step=2&eid=$id&n=$total");
