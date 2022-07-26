@@ -189,17 +189,17 @@ if ($sn == 1) {
     while ($row = mysqli_fetch_array($q)) {
       $s = $row['score'];
     }
-    $q = mysqli_query($con, "SELECT * FROM rank WHERE email='$email'") or die('Error161');
+    $q = mysqli_query($con, "SELECT * FROM ranking WHERE email='$email'") or die('Error161');
     $rowcount = mysqli_num_rows($q);
     if ($rowcount == 0) {
-      $q2 = mysqli_query($con, "INSERT INTO rank VALUES('$email','$s',NOW())") or die('Error165');
+      $q2 = mysqli_query($con, "INSERT INTO ranking VALUES('$email','$s',NOW())") or die('Error165');
     } 
     else {
       while ($row = mysqli_fetch_array($q)) {
         $sun = $row['score'];
       }
       $sun = $s + $sun;
-      $q = mysqli_query($con, "UPDATE `rank` SET `score`=$sun ,time=NOW() WHERE email= '$email'") or die('Error174');
+      $q = mysqli_query($con, "UPDATE `ranking` SET `score`=$sun ,time=NOW() WHERE email= '$email'") or die('Error174');
     }
     header("location:account.php?q=result&eid=$eid&m=$m");
   } else {
