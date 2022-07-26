@@ -111,11 +111,12 @@ if (isset($_SESSION['key'])) {
 }
 
 //quiz start
+
 if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
   $eid = @$_GET['eid'];
   $sn = @$_GET['n'];
   $total = @$_GET['t'];
-  $ans = $_POST['ans'];
+  $ans = @$_POST['ans'];
   $m=@$_GET['m'];
   
   $qid = @$_GET['qid'];
@@ -173,17 +174,17 @@ if ($sn == 1) {
     header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total&m=$m") or die('Error152');
     echo "<h1>here</h1>";
   
-  } else if ($_SESSION['key'] != 'sunny7785068889') {
+  } else if (1) {
     $q = mysqli_query($con, "SELECT score FROM history WHERE eid='$eid' AND email='$email'") or die('Error156');
     while ($row = mysqli_fetch_array($q)) {
       $s = $row['score'];
     }
-    $q = mysqli_query($con, "SELECT * FROM rank WHERE email='$email'") or die('Error161');
-    $rowcount = mysqli_num_rows($q);
+    $q1 = mysqli_query($con, "select * from rank where email='$email' ") or die('Error161');
+    $rowcount = mysqli_num_rows($q1);
     if ($rowcount == 0) {
       $q2 = mysqli_query($con, "INSERT INTO rank VALUES('$email','$s',NOW())") or die('Error165');
     } else {
-      while ($row = mysqli_fetch_array($q)) {
+      while ($row = mysqli_fetch_array($q1)) {
         $sun = $row['score'];
       }
       $sun = $s + $sun;

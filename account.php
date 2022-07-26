@@ -59,7 +59,7 @@ function disableNewTabClick() {
 </script>
 
 
-<script language="javascript" type="text/javascript">
+<!--<script language="javascript" type="text/javascript">
 window.onload=
 //Post your code
 function() {
@@ -75,7 +75,7 @@ function() {
            }
        }
 
-</script>
+</script>-->
 
 </head>
 <?php
@@ -457,7 +457,7 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
             
   }
 
-            $q = mysqli_query($con, "SELECT * FROM rank WHERE  email='$email' ") or die('Error157');
+            $q = mysqli_query($con, "SELECT * FROM ranking WHERE  email='$email' ") or die('Error157');
             while ($row = mysqli_fetch_array($q)) {
               $s = $row['score'];
               echo '<tr style="color:#990000"><td>Overall Score&nbsp;<span class="glyphicon glyphicon-stats" aria-hidden="true"></span></td><td>' . $s . '</td></tr>';
@@ -590,7 +590,7 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
 
           //ranking start
           if (@$_GET['q'] == 3) {
-            $q = mysqli_query($con, "SELECT * FROM rank  ORDER BY score DESC ") or die('Error223');
+            $q = mysqli_query($con, "SELECT * FROM ranking  ORDER BY score DESC ") or die('Error223');
             echo  '<div class="panel title">
 <table class="table table-striped title1" >
 <tr style="color:red"><td><b>Rank</b></td><td><b>Name</b></td><td><b>Gender</b></td><td><b>College</b></td><td><b>Score</b></td></tr>';
