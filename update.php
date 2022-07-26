@@ -52,7 +52,8 @@ if (isset($_SESSION['key'])) {
     $tag = $_POST['tag'];
     $desc = $_POST['desc'];
     $id = uniqid();
-    $q3 = mysqli_query($con, "INSERT INTO quiz VALUES  ('$id','$name' , '$sahi' , '$wrong','$total','$time' ,'$desc','$tag', NOW(),0)");
+    $q3 = mysqli_query($con, "INSERT INTO quiz VALUES  ('$id','$name' , '$sahi' , '$wrong','$total','$time' ,
+    '$desc','$tag', NOW(),0)");
 
     header("location:dash.php?q=4&step=2&eid=$id&n=$total");
   }
@@ -169,6 +170,7 @@ if ($sn == 1) {
 }
 
   }
+
   if ($sn != $total) {
     $sn++;
     header("location:account.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total&m=$m") or die('Error152');
