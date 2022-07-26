@@ -50,7 +50,8 @@ if (isset($_SESSION['key'])) {
       $qid = uniqid();
       $qns = $_POST['qns' . $i];
       $t = $_POST[$i . '5'];
-      $q3 = mysqli_query($con, "INSERT INTO squestions VALUES  ('$eid','$qid','$qns'  , '$i','$t')");
+      $img=$_POST[$i .'img'];
+      $q3 = mysqli_query($con, "INSERT INTO squestions VALUES  ('$eid','$qid','$qns'  , '$i','$t','$img')");
       $ansid = uniqid();
 
       $a = $_POST['ans' . $i];
@@ -97,11 +98,6 @@ if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
       }
     }
   }
-  //foreach($userans as $v){echo $v;echo '<br>';}
-  // foreach($keyword as $v){echo $v;}
-  //echo $k;
-
-
 
   if ($k == $input) {
     $q = mysqli_query($con, "SELECT * FROM quiz WHERE eid='$eid' ");
@@ -122,7 +118,9 @@ if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
     $q = mysqli_query($con, "UPDATE `history` SET `score`=$s,`level`=$sn,`sahi`=$r, date= NOW()  WHERE  email = '$email' AND eid = '$eid'") or die('Error124');
   }
   //partial
-  else if ($k < $input && $k > 0) {
+  else 
+  
+  if ($k < $input && $k > 0) {
 
       $q = mysqli_query($con, "SELECT * FROM quiz WHERE eid='$eid' ");
       while ($row = mysqli_fetch_array($q)) {
@@ -142,7 +140,10 @@ if (@$_GET['q'] == 'quiz' && @$_GET['step'] == 2) {
     $s = $s + $newsahi;
     
     $q = mysqli_query($con, "UPDATE `history` SET `score`=$s,`level`=$sn,`sahi`=$r, date= NOW()  WHERE  email = '$email' AND eid = '$eid'") or die('Error124');
-  }else if($ans==''){
+  }
+  
+  
+  else if($ans==''){
 //unattempted
 
 if ($sn == 1) {

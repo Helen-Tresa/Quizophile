@@ -6,7 +6,7 @@ session_destroy();
 include_once 'dbConnection.php';
 $ref=@$_GET['q'];
 $email = $_POST['email'];
-$password = $_POST['password'];
+$password = $_POST['password']; 
 
 $email = stripslashes($email);
 $email = addslashes($email);

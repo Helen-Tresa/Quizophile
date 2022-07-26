@@ -407,7 +407,7 @@ echo '<div class="form-group">
 
 <!--add short answer quiz -->
 
-<!--add quiz start-->
+
 <?php
 if(@$_GET['q']==6 && !(@$_GET['step']) ) {
 echo ' 
@@ -530,7 +530,14 @@ echo '<b>Question number&nbsp;'.$i.'&nbsp;:</><br /><!-- Text input-->
 </div>
 
 
-
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-12 control-label" for="'.$i.'4"></label>  
+  <div class="col-md-12">
+  <input id="'.$i.'img" name="'.$i.'img" placeholder="description" class="form-control input-md" type="text">
+    
+  </div>
+</div>
 
   
   <div class="form-group">

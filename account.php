@@ -330,8 +330,12 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
             while ($row4 = mysqli_fetch_array($q4)) {
               $option = $row4['option'];
               $optionid = $row4['optionid'];
-              echo '<input type="radio" id="ans" name="ans" value="' . $optionid . '">' . $option . '<br /><br />';
+              echo '<input type="radio" id="ans" onclick="select()" name="ans" value="' . $optionid . '">' . $option . '<br /><br />';
             }
+            echo '<script> function select(){
+              window.location="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'";
+            } </script>
+              ';
             echo '<br /><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
             //header("location:dash.php?q=4&step=2&eid=$id&n=$total");
 
@@ -440,7 +444,7 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
             $q = mysqli_query($con, "SELECT * FROM history WHERE eid='$eid' AND email='$email' ") or die('Error157');
             $qt = mysqli_query($con, "SELECT * FROM quiz WHERE eid='$eid' ") or die('Error157');
             echo  '<div class="panel">
-<center><h1 class="title" style="color:#660033">Result</h1><center><br /><table class="table table-striped title1" style="font-size:20px;font-weight:1000;">';
+  <center><h1 class="title" style="color:#660033">Result</h1><center><br /><table class="table table-striped title1" style="font-size:20px;font-weight:1000;">';
             $row2 = mysqli_fetch_array($qt);
             $qa = $row2['total'];
             while ($row = mysqli_fetch_array($q)) {
@@ -466,6 +470,7 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
             //here i copied
     //detailed analysis
             echo '<tr></tr></table></div><div class="panel"><br /><h3 align="center" style="font-family:calibri">:: Detailed Analysis ::</h3><br /><ol style="font-size:20px;font-weight:bold;font-family:calibri;margin-top:20px">';
+           //mcq
            if(@$_GET['m']==0){
             $q = mysqli_query($con, "SELECT * FROM questions WHERE eid='$_GET[eid]'") or die('Error197');
            
@@ -522,6 +527,7 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
             while ($row = mysqli_fetch_array($q)) {
               $question = $row['qns'];
               $qid      = $row['qid'];
+              $img= $row['desc'];
               $q2 = mysqli_query($con, "SELECT * FROM user_answer WHERE eid='$_GET[eid]' AND qid='$qid' AND email='$_SESSION[email]'") or die('Error197');
               if (mysqli_num_rows($q2) > 0) {
                   $row1         = mysqli_fetch_array($q2);
@@ -541,16 +547,18 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
                 echo '<li><div style="font-size:16px;font-weight:bold;font-family:calibri;margin-top:20px;background-color:lightgreen;padding:10px;word-wrap:break-word;border:2px solid darkgreen;border-radius:10px;">' . $question . ' <span class="glyphicon glyphicon-ok" style="color:darkgreen"></span></div><br />';
                 echo '<font style="font-size:14px;color:darkgreen"><b>Your Answer: </b></font><font style="font-size:14px;">' . $ans . '</font><br />';
                 echo '<font style="font-size:14px;color:darkgreen"><b>Correct Answer: </b></font><font style="font-size:14px;">' . $correctans . '</font><br />';
-            } 
+                echo '<font style="font-size:14px;color:black"><b>Explanation: </b></font><font style="font-size:14px;">' . $img . '</font><br />';
+              } 
             else if ($ans == "Unanswered") {
                 echo '<li><div style="font-size:16px;font-weight:bold;font-family:calibri;margin-top:20px;background-color:#f7f576;padding:10px;word-wrap:break-word;border:2px solid #b75a0e;border-radius:10px;">' . $question . ' </div><br />';
                 echo '<font style="font-size:14px;color:darkgreen"><b>Correct Answer: </b></font><font style="font-size:14px;">' . $correctans . '</font><br />';
-            } 
+                echo '<font style="font-size:14px;color:black"><b>Explanation: </b></font><font style="font-size:14px;">' . $img . '</font><br />';
+              } 
             else {
                 echo '<li><div style="font-size:16px;font-weight:bold;font-family:calibri;margin-top:20px;background-color:#f99595;padding:10px;word-wrap:break-word;border:2px solid darkred;border-radius:10px;">' . $question . ' <span class="glyphicon glyphicon-remove" style="color:red"></span></div><br />';
                 echo '<font style="font-size:14px;color:darkgreen"><b>Your Answer: </b></font><font style="font-size:14px;">' . $ans . '</font><br />';
                 echo '<font style="font-size:14px;color:red"><b>Correct Answer: </b></font><font style="font-size:14px;">' . $correctans . '</font><br />';
-                
+                echo '<font style="font-size:14px;color:black"><b>Explanation: </b></font><font style="font-size:14px;">' . $img . '</font><br />';
             }
             echo "<br /></li>";
 
