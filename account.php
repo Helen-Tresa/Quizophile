@@ -176,12 +176,13 @@ function home()
 </script>";
 
               //here
+              /*
               echo '<tr><td style="vertical-align:middle">' . $c++ . '</td><td style="vertical-align:middle">' . $title . '</td><td style="vertical-align:middle">' . $total . '</td><td style="vertical-align:middle">+' . $correct . '</td><td style="vertical-align:middle">-' . $wrong . '</td><td style="vertical-align:middle">' . $correct * $total . '</td><td style="vertical-align:middle">' . $time . '&nbsp;min</td>
   <td style="vertical-align:middle"><b><a href="account.php?q=quiz&step=2&eid=' . $eid . '&n=1&t=' . $total . '&m=' . $j . '" class="btn" onclick="home()" style="color:#FFFFFF;background:darkgreen;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Start</b></span></a></b></td>
   <td style="vertical-align:middle"><b><a href="account.php?q=4&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>
   
-  ';
-            /* if ($rowcount == 0) {
+  ';*/
+             if ($rowcount == 0) {
                 //echo '<tr><td>' . $c++ . '</td><td>' . $title . '</td><td>' . $total . '</td><td>' . $sahi * $total . '</td><td>' . $time . '&nbsp;min</td>
 	//<td><b><a href="account.php?q=quiz&step=2&eid=' . $eid . '&n=1&t=' . $total . '" class="pull-right btn sub1" style="margin:0px;background:#99cc32"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Start</b></span></a></b></td></tr>';
               
@@ -197,7 +198,7 @@ function home()
   <td style="vertical-align:middle"><b><a href="account.php?q=result&eid=' . $eid . '&m='.$j.'" class="btn" style="margin:0px;background:darkred;color:white";padding:7px;padding-left:10px;padding-right:10px>&nbsp;<span class="title1"><b>View Result</b></span></a></b></td>
   <td style="vertical-align:middle"><b><a href="account.php?q=4&eid=' . $eid . '" class="btn"  style="color:#FFFFFF;background:#10106b;padding:7px;padding-left:10px;padding-right:10px"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span><b>Rank</b></span></a></b></td></tr>';
 
-              }*/
+              }
             }
             $c = 0;
             echo '</table></div>';
