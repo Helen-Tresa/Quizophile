@@ -295,7 +295,7 @@ function secondPassed() {
   if (seconds <= 0) {
       clearInterval(countdownTimer);
       document.getElementById(\'countdown\').innerHTML = "Buzz Buzz...";
-      
+      document.getElementById(\'form\').submit();
     //  window.location ="update.php?q=quiz&step=2&eid=' . $_GET['eid'] . '&n=' . $_GET['n'] . '&t=' . $_GET['t'] . '&endquiz=end";
     window.location ="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'&endquiz=end";
   
