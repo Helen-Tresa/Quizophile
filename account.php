@@ -295,6 +295,7 @@ function secondPassed() {
   if (seconds <= 0) {
       clearInterval(countdownTimer);
       document.getElementById(\'countdown\').innerHTML = "Buzz Buzz...";
+      document.getElementById(\'form\').submit();
     //  window.location ="update.php?q=quiz&step=2&eid=' . $_GET['eid'] . '&n=' . $_GET['n'] . '&t=' . $_GET['t'] . '&endquiz=end";
     window.location ="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'&endquiz=end";
   
@@ -308,7 +309,7 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
 
 
 
-            echo '<form action="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'" method="POST"  class="form-horizontal">
+            echo '<form action="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'" method="POST"  class="form-horizontal" name="form" id="form">
 <br />';
             //finish quiz button
             
@@ -330,12 +331,9 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
             while ($row4 = mysqli_fetch_array($q4)) {
               $option = $row4['option'];
               $optionid = $row4['optionid'];
-              echo '<input type="radio" id="ans" onclick="select()" name="ans" value="' . $optionid . '">' . $option . '<br /><br />';
+              echo '<input type="radio" id="ans"  name="ans" value="' . $optionid . '">' . $option . '<br /><br />';
             }
-            echo '<script> function select(){
-              window.location="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'";
-            } </script>
-              ';
+            
             echo '<br /><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
             //header("location:dash.php?q=4&step=2&eid=$id&n=$total");
 
@@ -391,6 +389,7 @@ document.getElementById(\'countdown\').innerHTML = minutes + ":" +    remainingS
 if (seconds <= 0) {
     clearInterval(countdownTimer);
     document.getElementById(\'countdown\').innerHTML = "Buzz Buzz...";
+    document.getElementById(\'ans\').submit();
   //  window.location ="update.php?q=quiz&step=2&eid=' . $_GET['eid'] . '&n=' . $_GET['n'] . '&t=' . $_GET['t'] . '&endquiz=end";
   window.location ="update.php?q=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '&m='.$m.'&endquiz=end";
 
@@ -423,7 +422,7 @@ var countdownTimer = setInterval(\'secondPassed()\', 1000);
                       
                     }
                     
-                      echo '<input type="text" name="ans"  class="form-control input-md" placeholder="Enter answer (space separated)"><br /><br />';
+                      echo '<input type="text" id="ans" name="ans"  class="form-control input-md" placeholder="Enter answer (space separated)"><br /><br />';
                     
 
                       
